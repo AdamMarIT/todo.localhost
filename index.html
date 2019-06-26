@@ -1,25 +1,25 @@
 <!doctype html>
 <html>
 	<head>
-	<title> </title>
-	<meta charset="UTF-8">
-	<link href="https://fonts.googleapis.com/css?family=Roboto+Condensed&display=swap" rel="stylesheet">
-	<link rel="stylesheet" type="text/css" href="style.css">
-		<!-- Latest compiled and minified CSS 
-	<link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
+		<title> </title>
+		<meta charset="UTF-8">
+		<link href="https://fonts.googleapis.com/css?family=Roboto+Condensed&display=swap" rel="stylesheet">
+		<link rel="stylesheet" type="text/css" href="style.css">
+			<!-- Latest compiled and minified CSS 
+		<link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
+
+		
+		<link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css">-->
+		<script src="/jquery-3.4.1.min.js"></script>
+		<!-- Latest compiled and minified JavaScript -->
+		<script src="//netdna.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
+		<script src="/tasksActions.js?v=3"></script>
 
 	
-	<link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css">-->
-	<script src="/jquery-3.4.1.min.js"></script>
-	<!-- Latest compiled and minified JavaScript -->
-	<script src="//netdna.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
-	
-	
-	</head>
-	
+	</head>	
 	<body>
 	  <div class="header">
-		Lorem ipsum dolor sit amet, consectetur adipiscing elit 
+		use our service not forget things to do
 	  </div>
 	  <div class="main">
 	  	<h1 class="text-center text-primary">
@@ -58,88 +58,5 @@
 		  </div>
 		</div>
        </div>
-		<script>
-		    $(document).ready(function () {
-			  let storage = {};
-			  let value = "test";
-
-			  $('#list').append(`
-			    <div class="row inline">
-			      <div class="col-sm-8">${value}</div>
-			      <div class="col-sm-4">
-			        <div class="btn btn-sm btn-danger button-inline">Delete</div>
-			      </div>
-			    </div>`
-			    )
-		  
-			  	$('#add-button').click(function () { 
-				    let value = $('#new-item').val(); 
-				    let addTasks = addTask(value, '');
-				    console.log(storage);
-				    $('#new-item').val('');				     
-				});
-
-			    $('#list').on("click", '.delete-button', function () { 
-				  let randomThis = $(this).attr('data-item');
-				  
-				  console.log(storage);
-					delete storage[randomThis];
-				  $(`.item[data-item="${randomThis}"]`).remove(); 
-				  
-				  return false;
-				});
-
-				$('#save-button').click(function () {
-				  let tasksStr = JSON.stringify(storage);
-				  console.log(tasksStr);
-
-				  $.ajax('/save.php', {
-					  type: 'POST',  // http method
-					  data: {tasksName : tasksStr},  // data to submit
-					  success: function (data, status, xhr) {
-					    $('#success').append(`
-						      <div class="bg-blue">данные сохранены в файл</div>`
-						    )
-					  },
-					  error: function (jqXhr, textStatus, errorMessage) {
-					    console.log('error');
-					  }
-					});
-		 		 });
-
-				$('#load-button').click(function () {
-				  $.ajax('/load.php', {    
-					success: function (data, status, xhr) {
-					  let storageLoaded = JSON.parse(data);
-					  console.log(storageLoaded);
-					  
-					  for (let key in storageLoaded) { 
-			    		  let addTasks = addTask(storageLoaded[key], '(loaded)');
-						}
-					  },
-
-					error: function (jqXhr, textStatus, errorMessage) {
-					  console.log('error');
-					}
-
-					});
-		 		 });
-				function addTask(value, isloaded) {
-				  	let random = Math.random().toString(36).substring(2, 15) + Math.random().toString(36).substring(2, 15);
-				  	random = random.trim();
-				  	console.log(random);
-				  	$('#list').append(`
-					  <div class="row item inline" data-item="${random}">
-					     <div class="col-sm-8">${value}&nbsp;${isloaded}</div>
-					     <div class="col-sm-2">
-				            <div class="btn btn-sm btn-danger delete-button button-inline" data-item="${random}">Delete
-				            </div>
-				          </div>`
-				    )
-				    storage[random] = value;	
-				}
-		  });
-		</script>
-
 	</body>
 </html>

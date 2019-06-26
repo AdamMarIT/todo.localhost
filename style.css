@@ -60,15 +60,15 @@ h1 {
   text-decoration: none;
   color: #000;
   background-color: #ff9b19;
-  outline: none;
   border-radius: 5px;
 }
 .button-inline:hover {
   background-color: #ff9000;
+  cursor: pointer;
 }
 
 .button-inline:active {
-  background: none;
+  background-color: #ff9b19;
 }
 
 .col-sm-8 {
@@ -81,6 +81,5 @@ h1 {
   height: 2em;
   line-height: 2em;
   text-align: left;
-  color: #999;
-  
+  color: #999; 
 }
