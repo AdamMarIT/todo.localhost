@@ -41,12 +41,64 @@ class Storage {
   }
 }
 
+class SaveManager {
+
+  constructor() {
+    let storage = new Storage;
+  }
+
+  setStorage(storage) {
+    this.storage = storage
+  }
+
+  save() {
+    let tasksStr = this.storage.getJson();
+
+    $.ajax('/save.php', {
+      type: 'POST',  
+      data: {tasksName : tasksStr}, 
+      success: function (data, status, xhr) {
+        $('#success').show("slow");
+        setTimeout(function() { 
+          $('#success').hide();
+        }, 3000);
+      },
+      error: function (jqXhr, textStatus, errorMessage) {
+      }
+    });
+  }
+
+  load() {
+    const self = this; 
+
+    $.ajax('/load.php', {    
+      success: function (data, status, xhr) {
+        let storageLoaded = JSON.parse(data); 
+        for (let key in storageLoaded) { 
+          self.addTask(storageLoaded[key], '(loaded)');
+        }
+      },
+      error: function (jqXhr, textStatus, errorMessage) {
+      }
+    });
+  }
+
+  addTask(taskBody, isloaded) {
+    const task = new Task(taskBody, isloaded);          
+    $('#list').append(task.getHtml());
+    this.storage.add(task)
+  }
+
+}
+
 $(document).ready(function () { 
-  const storage = new Storage();
-		  
+  const storage = new Storage();	  
+  const saveManager = new SaveManager();
+  saveManager.setStorage(storage);
+
   $('#add-button').click(function () { 
     let taskBody = $('#new-item').val(); 
-    addTask(taskBody, '');
+    saveManager.addTask(taskBody, '');
 
     $('#new-item').val('');				     
   });
@@ -60,38 +112,11 @@ $(document).ready(function () {
   });
 
   $('#save-button').click(function () {
-    let tasksStr = storage.getJson();
-
-    $.ajax('/save.php', {
-  	  type: 'POST',  
-  	  data: {tasksName : tasksStr}, 
-  	  success: function (data, status, xhr) {
-  	    $('#success').append(`
-  	      <div class="bg-blue">saved to file</div>`
-  	    )
-  	  },
-  	  error: function (jqXhr, textStatus, errorMessage) {
-  	  }
-  	});
+    saveManager.save();
   });
 
   $('#load-button').click(function () {
-    $.ajax('/load.php', {    
-    	success: function (data, status, xhr) {
-    	  let storageLoaded = JSON.parse(data); 
-    	  for (let key in storageLoaded) { 
-    	    addTask(storageLoaded[key], '(loaded)');
-    	  }
-    	},
-    	error: function (jqXhr, textStatus, errorMessage) {
-    	}
-    });
+    saveManager.load();
   });
-
-  function addTask(taskBody, isloaded) {
-    const task = new Task(taskBody, isloaded); 				  
-    $('#list').append(task.getHtml());
-    storage.add(task)
-  }
 
 });

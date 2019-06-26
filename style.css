@@ -76,7 +76,8 @@ h1 {
   width: 30em;
 }
 
-.bg-blue {
+#success {
+  display: none;
   width: 35em;
   height: 2em;
   line-height: 2em;
