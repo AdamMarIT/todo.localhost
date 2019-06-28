@@ -1,6 +1,6 @@
 <?php
 
-	if ($_POST["tasksName"]){
+	if ($_POST["tasks"]){
 		$file = 'tasks.txt';
-        file_put_contents($file, $_POST["tasksName"]);
+        file_put_contents($file, $_POST["tasks"]);
 	}

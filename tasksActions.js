@@ -1,7 +1,7 @@
 class Task {
 
-  constructor(taskBody,  isloaded) {
-    this.taskBody = taskBody;
+  constructor(body,  isloaded) {
+    this.body = body;
     this.isloaded = isloaded;
     this.key = Math.random().toString(36).substring(2, 15);
   }
@@ -10,7 +10,7 @@ class Task {
     let stringHtml = `
       <div class="row item inline" data-item="${this.key}">
         <div class="col-sm-8">
-          ${this.taskBody}&nbsp;${this.isloaded}
+          ${this.body}&nbsp;${this.isloaded}
         </div>
         <div class="col-sm-2">
           <div class="btn btn-sm btn-danger delete-button button-inline" data-item="${this.key}">
@@ -29,7 +29,7 @@ class Storage {
   }
 
   add(task) {
-    this.storage[task.key] = task.taskBody;
+    this.storage[task.key] = task.body;
   }
 
   remove(taskKey) {
@@ -44,7 +44,6 @@ class Storage {
 class SaveManager {
 
   constructor() {
-    let storage = new Storage;
   }
 
   setStorage(storage) {
@@ -56,29 +55,27 @@ class SaveManager {
 
     $.ajax('/save.php', {
       type: 'POST',  
-      data: {tasksName : tasksStr}, 
+      data: {tasks : tasksStr}, 
       success: function (data, status, xhr) {
         $('#success').show("slow");
         setTimeout(function() { 
           $('#success').hide();
         }, 3000);
       },
-      error: function (jqXhr, textStatus, errorMessage) {
-      }
     });
   }
 
-  load() {
-    const self = this; 
+  load() { 
 
     $.ajax('/load.php', {    
-      success: function (data, status, xhr) {
-        let storageLoaded = JSON.parse(data); 
-        for (let key in storageLoaded) { 
-          self.addTask(storageLoaded[key], '(loaded)');
+      success: (data, status, xhr) => {
+        let tasksLoaded = JSON.parse(data); 
+        for (let key in tasksLoaded) { 
+          this.addTask(tasksLoaded[key], '(loaded)');
         }
       },
-      error: function (jqXhr, textStatus, errorMessage) {
+      error: (jqXhr, textStatus, errorMessage) => {
+        this.addTask('you have no tasks', '');
       }
     });
   }
@@ -108,7 +105,6 @@ $(document).ready(function () {
     storage.remove(randomThis);
 
     $(`.item[data-item="${randomThis}"]`).remove(); 
-    return false;
   });
 
   $('#save-button').click(function () {
