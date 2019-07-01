@@ -77,7 +77,7 @@ h1 {
 }
 
 #success {
-  display: none;
+  /*display: none;*/
   width: 35em;
   height: 2em;
   line-height: 2em;

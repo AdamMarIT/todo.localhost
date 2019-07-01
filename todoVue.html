@@ -1,0 +1,72 @@
+<!doctype html>
+<html>
+	<head>
+		<title> </title>
+		<meta charset="UTF-8">
+		<link href="https://fonts.googleapis.com/css?family=Roboto+Condensed&display=swap" rel="stylesheet">
+		<link rel="stylesheet" type="text/css" href="style.css">
+		
+		<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+
+	</head>	
+	<body>
+	    <div class="header">
+		  	<div>
+				use our service not forget things to do 
+			</div>
+	    </div>
+
+		<div class="main">
+		  <h1 class="text-center text-primary">
+			  Todo List
+			</h1>
+		  <div class="tasks" id="toDoList">
+				<div class="row">
+				  <div id="success" v-if="saveMessage">saved to file</div>
+				</div>
+				<div class="row">
+				  <div class="col-sm-3"></div>
+				  <div class="col-sm-6">
+				    <div id="list" style="margin: 30px 0px;">
+				    	<div class="row item inline" v-for="(task, index) in tasks" v-bind:key="index">
+				        <div class="col-sm-8">
+				          {{ task.body }}
+				        </div>
+				        <div class="col-sm-2">
+				          <div class="btn btn-sm btn-danger delete-button button-inline" v-on:click="deleteTask(index)">
+				            Delete
+				          </div>
+				        </div>
+				      </div>
+				    </div>
+				    <div class="row inline">
+				      <div class="col-sm-8">
+				        <input type="text" id="new-item" v-model="taskBody" placeholder="new task" class="form-control">
+				      </div>
+				      <div class="col-sm-4">
+				        <div class="btn btn-primary button-inline" id="add-button" v-on:click="addTask">
+				          Add
+				        </div>
+				      </div>
+				    </div>
+				    <div class="row">
+				      <div class="col-sm-4">
+				        <div class="btn btn-primary button-inline" id="save-button" style="margin: 30px 0px;" v-on:click="save">
+				          Save
+				      	</div>
+				      	<div class="btn btn-primary button-inline" id="load-button" style="margin: 30px 0px;" v-on:click="load">
+				           Load
+				        </div>
+				      </div>
+				      <div class="col-sm-8">
+				      </div>    
+				  </div>
+				</div>
+		       </div>
+		   </div>
+		</div>
+	</body>
+	<script src="/tasksActionsVue.js"></script>
+</html>
+
+
