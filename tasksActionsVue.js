@@ -1,17 +1,23 @@
-var toDoList = {
-  taskBody : "",
-  saveMessage: false,
-
-  tasks: []
-};
-
-var vm = new Vue({
+let vm = new Vue({
   el: '#toDoList',
-  data: toDoList,
+  data: {
+    taskBody : "",
+    saveMessage: false,
+    activeColor: '#52c7b8',
+    tasks: []
+  },
+
+  created: function () {
+    if (localStorage.tasks) {
+      this.tasks = JSON.parse(localStorage.tasks);
+    }
+    setTimeout(() => this.saveToLocalStorage(), 5000);
+  },
 
   methods: {
     addTask: function(e) {
-      this.tasks.push({body : this.taskBody}) 
+      this.tasks.push({
+        body : this.taskBody}) 
       this.taskBody = '';
     },
     deleteTask(index) {
@@ -23,7 +29,7 @@ var vm = new Vue({
         method: 'POST',
         body: JSON.stringify(this.tasks)
       });
-      this.saveMessage = await true;
+      this.saveMessage = true;
       setTimeout(() => this.saveMessage = false, 2000);
     },
 
@@ -31,11 +37,18 @@ var vm = new Vue({
       const response = await fetch('/load.php');
       const json =  await response.json();
 
-      for (let key in json){
+      for (let task of json){
         this.tasks.push({
-          body: json[key]['body']
+          body: task['body']
         });
       }
+    },
+    saveToLocalStorage() {
+      let serialTasks = JSON.stringify(this.tasks);
+      localStorage.setItem("tasks", serialTasks);
+      setTimeout(() => this.saveToLocalStorage(), 5000);
     }
   } 
-})
+});
+
+

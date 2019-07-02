@@ -9,14 +9,15 @@ class Task {
   getHtml() {
     let stringHtml = `
       <div class="row item inline" data-item="${this.key}">
-        <div class="col-sm-8">
+        <div class="taskBody">
           ${this.body}&nbsp;${this.isloaded}
         </div>
-        <div class="col-sm-2">
-          <div class="btn btn-sm btn-danger delete-button button-inline" data-item="${this.key}">
-            Delete
+          <div class="btn btn-sm btn-danger delete-button button-inline button-small">
+            &#8226;
           </div>
-        </div>
+          <div class="btn btn-sm btn-danger delete-button button-inline button-small" data-item="${this.key}">
+            &times;
+          </div>
       </div>`
     return stringHtml;
   }

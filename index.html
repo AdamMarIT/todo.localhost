@@ -5,65 +5,57 @@
 		<meta charset="UTF-8">
 		<link href="https://fonts.googleapis.com/css?family=Roboto+Condensed&display=swap" rel="stylesheet">
 		<link rel="stylesheet" type="text/css" href="style.css">
-			<!-- Latest compiled and minified CSS 
+		<!-- Latest compiled and minified CSS
 		<link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
-
 		
 		<link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css">-->
 		<script src="/jquery-3.4.1.min.js"></script>
 		<!-- Latest compiled and minified JavaScript -->
 		<script src="//netdna.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
 		<script src="/tasksActions.js?v=3"></script>
-
-	
-	</head>	
+		
+	</head>
 	<body>
-	  <div class="header">
-	  	<div>
-			use our service not forget things to do 
+		<div class="header">
+			<div class="main">
+				<h1>
+					Todo List
+				</h1>
+			</div>
 		</div>
 		<div>
 			<a href="/select.html">select</a>
 			<a href="/todoVue.html">todoVue</a>
 		</div>
-	  </div>
-
-	  <div class="main">
-	  	<h1 class="text-center text-primary">
-		  Todo List
-		</h1>
-	  	<div class="tasks">
-		<div class="row">
-		  <div id="success">saved to file</div>
-		</div>
-		<div class="row">
-		  <div class="col-sm-3"></div>
-		  <div class="col-sm-6">
-		    <div id="list" style="margin: 30px 0px;">
-		    </div>
-		    <div class="row inline">
-		      <div class="col-sm-8">
-		        <input type="text" id="new-item" placeholder="new task" class="form-control">
-		      </div>
-		      <div class="col-sm-4">
-		        <div class="btn btn-primary button-inline" id="add-button">
-		          Add
-		        </div>
-		      </div>
-		    </div>
-		    <div class="row">
-		      <div class="col-sm-4">
-		        <div class="btn btn-primary button-inline" id="save-button" style="margin: 30px 0px;">
-		          Save
-		      	</div>
-		      	<div class="btn btn-primary button-inline" id="load-button" style="margin: 30px 0px;">
-		           Load
-		        </div>
-		      </div>
-		      <div class="col-sm-8">
-		      </div>    
-		  </div>
-		</div>
-       </div>
-	</body>
-</html>
+		<div class="main">
+			<div class="tasks">
+				<div class="row">
+					<div id="success">saved to file</div>
+				</div>
+				<div class="col-sm-8 taskline">
+					<input type="text" id="new-item" placeholder="new task">
+					<div class="btn btn-primary button-inline button-small" id="add-button">
+						+
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-sm-3"></div>
+					<div class="col-sm-6">
+						<div id="list">
+						</div>
+						<div class="row">
+							<div class="col-sm-4 buttonLine">
+								<div class="btn btn-primary button-inline" id="save-button">
+									Save
+								</div>
+								<div class="btn btn-primary button-inline" id="load-button">
+									Load
+								</div>
+							</div>
+							<div class="col-sm-8">
+							</div>
+						</div>
+					</div>
+				</div>
+			</body>
+		</html>

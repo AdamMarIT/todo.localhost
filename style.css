@@ -3,18 +3,20 @@
   padding:0;
   font-family: 'Roboto Condensed', sans-serif;}
 
-.header {
-  height: 5em;
-  line-height: 5em;
-  padding-left: 30px;
-  background-color: #ff9b19;
+
+.listHeader {
+  position: relative;
+  margin-left: auto;
+  margin-right: auto;
+  text-align: center;
+  background-color: #009688;
+  line-height: 60px;
+  height:60px;
+  width: 40em;
 }
 
-.main {
-  text-align: center;
-  height: 600px;
-  background: url("12345.png");
-  padding-top: 30px;
+.helper{
+  height:30px;
 }
 
 .tasks {
@@ -22,12 +24,16 @@
   margin-left: auto;
   margin-right: auto;
   text-align: left;
+  padding: 5px 0;
   width: 40em;
-  border-radius: 5px;
+  background-color: #E1E2E1;
+  
 }
 
 h1 {
-  margin: auto;
+  margin-top: 10px;
+  margin-left: 10px;
+  color: #eee;
 }
 
 .inline>div {
@@ -36,9 +42,8 @@ h1 {
 
 #new-item {
   position: relative;
-  width: 30em;
+  width: 40em;
   height: 3em;
-  margin-right: 2em;
   text-align: left;
   padding: 0 1em;
   line-height: 2em;
@@ -58,22 +63,51 @@ h1 {
   vertical-align: middle;
   text-align: center;
   text-decoration: none;
-  color: #000;
-  background-color: #ff9b19;
+  color: #eee;
+  background-color: #009688;
   border-radius: 5px;
 }
 .button-inline:hover {
-  background-color: #ff9000;
+  background-color: #00675b;
   cursor: pointer;
 }
 
 .button-inline:active {
-  background-color: #ff9b19;
+  background-color:#009688;
 }
 
-.col-sm-8 {
+.button-small {
+  width: 1em;
+}
+
+#list>.button-small{
+  background-color: none;
+}
+
+.taskline {
   position: relative;
-  width: 30em;
+  display: inline-block;
+  margin: 10px 10px;
+  
+}
+
+.item{
+  border-bottom: 1px solid #009688;
+  margin: 1px 10px; 
+}
+
+.taskBody {
+  position: relative;
+  width: 475px;
+  text-align: left;
+  padding: 0 1em;
+  line-height: 2em;
+  color:#333;
+
+}
+
+.buttonLine {
+  margin: 10px 10px; 
 }
 
 #success {
@@ -82,5 +116,23 @@ h1 {
   height: 2em;
   line-height: 2em;
   text-align: left;
+  margin-left: 10px;
   color: #999; 
+}
+
+.point-button {
+  background-color: inherit;
+
+}
+
+.point-button:hover {
+  background-color: inherit;
+}
+
+.point-button:active {
+  background-color: inherit;
+}
+
+#list{
+  min-height: 100px;
 }
