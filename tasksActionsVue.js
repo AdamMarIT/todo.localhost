@@ -11,13 +11,16 @@ let vm = new Vue({
     if (localStorage.tasks) {
       this.tasks = JSON.parse(localStorage.tasks);
     }
-    setTimeout(() => this.saveToLocalStorage(), 5000);
+    setInterval(() => this.saveToLocalStorage(), 5000);
   },
 
   methods: {
     addTask: function(e) {
       this.tasks.push({
-        body : this.taskBody}) 
+        body : this.taskBody,
+        color: this.activeColor,
+      })
+
       this.taskBody = '';
     },
     deleteTask(index) {
@@ -39,14 +42,37 @@ let vm = new Vue({
 
       for (let task of json){
         this.tasks.push({
-          body: task['body']
+          body: task['body'],
+          color: task['color'],
         });
       }
     },
     saveToLocalStorage() {
       let serialTasks = JSON.stringify(this.tasks);
       localStorage.setItem("tasks", serialTasks);
-      setTimeout(() => this.saveToLocalStorage(), 5000);
+    },
+    
+    changePriority(color, index) {
+      let tBody = this.tasks[index].body;
+
+      if (color === '#52c7b8') {
+        Vue.set(this.tasks, index, {
+          body: tBody,
+          color: 'orange',
+        });    
+      }
+      if (color === 'orange') {
+        Vue.set(this.tasks, index, {
+          body: tBody,
+          color: 'red',
+        });
+      }
+      if (color === 'red') {
+        Vue.set(this.tasks, index, {
+          body: tBody,
+          color: '#52c7b8',
+        });
+      }
     }
   } 
 });

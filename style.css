@@ -136,3 +136,11 @@ h1 {
 #list{
   min-height: 100px;
 }
+
+.red {
+  color:red;
+}
+
+.orange {
+  color:orange;
+}

@@ -31,10 +31,10 @@
 						<div id="list">
 							<div class="row item inline" v-for="(task, index) in tasks" v-bind:key="index">
 								<div class="taskBody" >
-									{{ task.body }}
+									{{ task.body }} <i class="fas fa-exclamation orange" v-if="task.color === 'orange'"></i> <i class="fas fa-exclamation red" v-else-if="task.color === 'red'"></i>
 								</div>
-								<div class="point-button button-inline button-small">
-									<i class="fas fa-highlighter" v-bind:style="{ color: activeColor}"></i>
+								<div class="point-button button-inline button-small" v-on:click="changePriority(task.color, index)">
+									<i class="fas fa-highlighter" v-bind:style="{ color: task.color}" ></i>
 								</div>
 								<div class="delete-button button-inline button-small" v-on:click="deleteTask(index)">
 									&times;
